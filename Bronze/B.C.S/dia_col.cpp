@@ -19,7 +19,7 @@ int main(){
 	for (int i = 0; i < n; ++i){
 		int count = 0;
 		for(int j = 0; j < n; ++j){
-			if(v[i] <= v[j] && v[j] <= v[i]+k){
+			if(v[i] <= v[j] && v[j] <= v[i]+k){  // Done with forward swiping, could also be done with backward swiping.
 				count++;
 			}
 		}
