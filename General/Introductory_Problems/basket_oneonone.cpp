@@ -1,6 +1,7 @@
 // Problem statement can be found on the link below.
 // https://open.kattis.com/problems/basketballoneonone
 
+// Solution 1
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -33,4 +34,14 @@ int main(){
         cout << "B" << endl;
     }
     return 0;
+}
+
+// Solution 2
+#include <iostream>
+using namespace std;
+
+int main() {
+	string s;
+	cin >> s;
+	cout << s[s.size() - 2];
 }
