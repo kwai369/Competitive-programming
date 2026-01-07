@@ -9,35 +9,17 @@ void setIO(string s) {
 
 int main(){
 	setIO("shell");
-	vector<int> vec(3);
-	int n;
-	cin >> n;
-	int a[n],b[n],g[n];
-	vec[0] = 1;
-	int ans = 0,maxi = 0;
-	for(int i=0;i<n;i++){
-		cin >> a[i] >> b[i] >> g[i];
-		a[i]--,b[i]--,g[i]--;
-		swap(vec[a[i]],vec[b[i]]);
-		if(vec[g[i]]){
-			ans++;
-		}
-	}
-	maxi = max(maxi,ans);
-	vec[1] = 1,vec[0] = 0,vec[2] = 0,ans = 0;
-	for(int i=0;i<n;i++){
-		swap(vec[a[i]],vec[b[i]]);
-		if(vec[g[i]]){
-			ans++;
-		}
-	}
-	maxi = max(maxi,ans);
-	vec[2] = 1,vec[1] = 0,vec[0] = 0,ans = 0;
-	for(int i=0;i<n;i++){
-		swap(vec[a[i]],vec[b[i]]);
-		if(vec[g[i]]){
-			ans++;
-		}
-	}
-	cout << max(maxi,ans);
+    int shell[3] = {0, 1, 2};
+    int n;
+    cin >> n;
+    vector<int> counter(3);
+    for(int i = 0; i < n; i++){
+		int a, b, c;
+        cin >> a >> b >> c;
+        a--, b--, c--;
+        swap(shell[a], shell[b]);
+        counter[shell[c]]++;
+    }
+    cout << max({counter[0], counter[1], counter[2]}) << endl;
+	return 0;
 }
