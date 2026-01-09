@@ -1,4 +1,5 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
+#define ll long long
 using namespace std;
 
 void setIO(string s) {
@@ -8,23 +9,22 @@ void setIO(string s) {
 }
 
 int main(){
-	setIO("cowsignal");
-	int m,n,k;
-	cin >> m >> n >> k;
-	char sig[m][n];
-	for(int i=0;i<m;i++){
-		for(int j=0;j<n;j++){
-			cin >> sig[i][j];
-		}
-	} 
-	for(int p=0;p<m;p++){
-		for(int q=0;q<k;q++){
-			for(int r=0;r<n;r++){
-				for(int s=0;s<k;s++){
-					cout << sig[p][r];
-				}
-			}
-			cout << "\n";
-		}
-	}
+    setIO("cowsignal");
+    int m, n, k;
+    cin >> m >> n >> k;
+    vector<string> cow_signal(m);
+    for(int i = 0; i < m; i++){
+        cin >> cow_signal[i];
+    }
+    for(int i = 0; i < m; i++){
+        for(int j = 0; j < k; j++){
+            for(int l = 0; l < n; l++){
+                for(int p = 0; p < k; p++){
+                    cout << cow_signal[i][l];
+                }
+            }
+            cout << "\n";
+        }
+    }
+    return 0;
 }
