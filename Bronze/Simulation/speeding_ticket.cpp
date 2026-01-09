@@ -1,4 +1,5 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
+#define ll long long
 using namespace std;
 
 void setIO(string s) {
@@ -8,31 +9,32 @@ void setIO(string s) {
 }
 
 int main(){
-	setIO("speeding");
-	vector<int> road(100);
-	vector<int> bess(100);
-	int n,m,len = 0;
-	cin >> n >> m;
-	for(int i=0;i<n;i++){
-		int a,b;
-		cin >> a >> b;
-		for(int j=len;j<len+a;j++){
-			road[j] = b;
-		}
-		len += a;
-	}
-	len = 0;
-	for(int i=0;i<m;i++){
-		int a,b;
-		cin >> a >> b;
-		for(int j=len;j<len+a;j++){
-			bess[j] = b;
-		}
-		len += a;
-	}
-	int maxi = 0; 	 
-	for(int i=0;i<100;i++){
-		maxi = max(maxi,bess[i]-road[i]);
-	}
-	cout << maxi;
+    setIO("speeding");
+    int n, m;
+    cin >> n >> m;
+    int bessie_speed[101], speed_limit[101];
+    int total_len = 1;
+    for(int i = 0; i < n; i++){
+        int len, speed;
+        cin >> len >> speed;
+        for(int j = total_len; j < total_len + len; j++){
+            speed_limit[j] = speed;
+        }
+        total_len += len;
+    }
+    total_len = 1;
+    for(int i = 0; i < m; i++){
+        int len, speed;
+        cin >> len >> speed;
+        for(int j = total_len; j < total_len + len; j++){
+            bessie_speed[j] = speed;
+        }
+        total_len += len;
+    }
+    int ans = 0;
+    for (int i = 1; i < 101; i++){
+        ans = max(ans, bessie_speed[i] - speed_limit[i]);
+    }
+    cout << ans << endl;
+    return 0;
 }
