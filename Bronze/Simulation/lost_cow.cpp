@@ -1,4 +1,5 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
+#define ll long long
 using namespace std;
 
 void setIO(string s) {
@@ -8,25 +9,22 @@ void setIO(string s) {
 }
 
 int main(){
-	setIO("lostcow");
-	int x,y;
-	cin >> x >> y;
-	int dis = 1,mul = 1,fac = -2,n,o;
-	if(x+1 == y){
-		cout << dis;
-	}
-	else{
-		o = x+1;
-		while(1){	
-			n = x + (mul*fac);
-			dis += abs(o - n);
-			if((n <= y && y < o) || (o < y && y <= n)){
-				dis -= (abs(n-y));
-				break;
-			}
-			o = n;
-			mul *= fac;
-		}
-		cout << dis;
-	}
+    setIO("lostcow");
+    int x, y;
+    cin >> x >> y;
+    int dist = 0, range = 1;
+    while(true){
+        if(x <= y && y <= x+range){
+            dist += abs(x-y);
+            break;
+        }
+        if(y <= x && y >= x+range){
+            dist += abs(x-y);
+            break;
+        }
+        dist += 2 * abs(range);
+        range *= (-2);
+    }
+    cout << dist << endl;
+    return 0;
 }
