@@ -14,10 +14,11 @@ int main(){
     setIO("traffic");
     int n;
     cin >> n;
-    vector<vector<int>> range(n, vector<int>(2));
+    vector<int> low(n);
+	vector<int> high(n);
     for (int i = 0; i < n; i++){
         string s;
-        cin >> s >> range[i][0] >> range[i][1];
+        cin >> s >> low[i] >> high[i];
         if(s == "on"){
             RAMPS[i] = 1;
         }
@@ -31,33 +32,33 @@ int main(){
     int lowest = -9999, highest = 9999;
     for(int i = n-1; i >= 0; i--){
         if(RAMPS[i] == 0){
-            lowest = max(lowest, range[i][0]);
-            highest = min(highest, range[i][1]);
+            lowest = max(lowest, low[i]);
+            highest = min(highest, high[i]);
         }
         else if((RAMPS[i]*(-1)) == 1){
-            lowest += range[i][0];
-            highest += range[i][1];
+            lowest += low[i];
+            highest += high[i];
         }
         else{
-            lowest -= range[i][1];
-            highest -= range[i][0];
+            lowest -= high[i];
+            highest -= low[i];
             lowest = max(0, lowest);
         }
     }
     cout << lowest << " " << highest << endl;
     lowest = -9999, highest = 9999;
-    for(int i = 0; i < n; i++){
+   for(int i = 0; i < n; i++){
         if(RAMPS[i] == 0){
-            lowest = max(lowest, range[i][0]);
-            highest = min(highest, range[i][1]);
+            lowest = max(lowest, low[i]);
+            highest = min(highest, high[i]);
         }
         else if(RAMPS[i] == 1){
-            lowest += range[i][0];
-            highest += range[i][1];
+            lowest += low[i];
+            highest += high[i];
         }
         else{
-            lowest -= range[i][1];
-            highest -= range[i][0];
+            lowest -= high[i];
+            highest -= low[i];
             lowest = max(0, lowest);
         }
     }
