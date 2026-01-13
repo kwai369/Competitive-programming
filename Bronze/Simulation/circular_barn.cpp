@@ -1,4 +1,5 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
+#define ll long long
 using namespace std;
 
 void setIO(string s) {
@@ -8,22 +9,24 @@ void setIO(string s) {
 }
 
 int main(){
-	 setIO("cbarn");
-	 int n;
-	 cin >> n;
-	 vector<int> v(n);
-	 for (int i = 0; i < n; ++i){
-	 	cin >> v[i];
-	 }
-	 int ans = INT_MAX;
-     for (int i = 0; i < n; ++i){
-     	int maxi = 0;
-     	for (int j = 0; j < n; ++j){
-     		maxi += (v[j]*j);
-     	}
-     	ans = min(ans,maxi);
-     	v.push_back(v[0]);
-     	v.erase(v.begin());
-     }
-     cout << ans;
+    setIO("cbarn");
+    int n, total_dist = 0;
+    cin >> n;
+    vector<int> cows(n);
+    for (int i = 0; i < n; i++){
+        cin >> cows[i];
+        total_dist += cows[i];
+    }
+    int ans = INT32_MAX;
+    for(int i = 0; i < n; i++){
+        int count = 0;
+        int left = total_dist;
+        for(int j = i; j < n + i; j++){
+            left -= cows[j % n];
+            count += left;
+        }
+        ans = min(ans, count);
+    }
+    cout << ans << endl;
+    return 0;
 }
