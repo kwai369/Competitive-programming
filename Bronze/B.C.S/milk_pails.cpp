@@ -1,4 +1,5 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
+#define ll long long
 using namespace std;
 
 void setIO(string s) {
@@ -8,20 +9,20 @@ void setIO(string s) {
 }
 
 int main(){
-	setIO("pails");
-	int x,y,m;
+    setIO("pails");
+    int x, y, m;
 	cin >> x >> y >> m;
-	int max_x = round(m/x);
-	int max_y = round(m/y);
-	int app = 1e9;
-	for(int i=0;i<=max_x;i++){
-		for(int j=0;j<=max_y;j++){
-			int add = (x*i) + (y*j);
-			if(add > m){
-				continue;
+	int x_max = m/x;
+	int y_max = m/y;
+	int ans = INT_MAX;
+	for(int i = 0; i <= x_max; i++){
+		for(int j = 0; j <= y_max; j++){
+			int l_h_s = (x*i) + (y*j);
+			if(l_h_s <= m){
+				ans = min(ans, m - l_h_s);
 			}
-			app = min(app,m-add);
 		}
 	}
-	cout << m-app;
+	cout << m - ans << endl;
+	return 0;
 }
