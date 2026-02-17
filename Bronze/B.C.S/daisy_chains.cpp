@@ -1,4 +1,5 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
+#define ll long long
 using namespace std;
 
 void setIO(string s) {
@@ -8,28 +9,30 @@ void setIO(string s) {
 }
 
 int main(){
-	//setIO("diamond");
-	int n;
+    int n;
 	cin >> n;
-	vector<int> pet(n+1);
-	vector<int> sum(n+1);
-	for(int i=1;i<=n;i++){
-		cin >> pet[i];
-		sum[i] += pet[i];
-		sum[i] += sum[i-1];
+	vector<int> petals(n+1);
+	vector<int> sum_of_petals(n+1);
+	for(int i = 1; i <= n; i++){
+		cin >> petals[i];
+		sum_of_petals[i] = sum_of_petals[i-1] + petals[i];
 	}
-	int val = 0;
-	for(int i=1;i<=n;i++){
-		for(int j=i;j<=n;j++){
-			double avg = (sum[j] - sum[i-1]);
-			avg /= ((j - i) + 1);
-			for(int k = i;k <= j;k++){
-				if(avg == pet[k]){
-					val++;
-					break;
+	int ans = 0;
+	for(int i = 1; i < n; i++){
+		for(int j = i+1; j <= n; j++){
+			int sum = sum_of_petals[j] - sum_of_petals[i-1];
+			int num = (j - i) + 1;
+			if(sum % num == 0){
+				int avg = sum/num;
+				for(int k = i; k <= j; k++){
+					if(avg == petals[k]){
+						ans++;
+						break;
+					}
 				}
-			} 
+			}
 		}
 	}
-	cout << val;
+	cout << ans + n << "\n";
+	return 0;
 }
