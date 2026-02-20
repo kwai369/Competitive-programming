@@ -13,16 +13,16 @@ int main(){
 	cin >> n;
 	vector<int> x(n);
 	vector<int> y(n);
-	for(int i=0;i<n;i++){
+	for(int i = 0; i < n; i++){
 		cin >> x[i] >> y[i];
 	}
 	int ans = 0;
-	for(int i=0;i<n;i++){
-		for(int j=0;j<n;j++){
-			for(int k=0;k<n;k++){
+	for(int i = 0; i < n; i++){
+		for(int j = 0; j < n; j++){
+			for(int k = 0; k < n; k++){
 				if(y[i] == y[j] && x[k] == x[i]){
 					int maxi = abs((x[j] - x[i]) * (y[k] - y[i]));
-					ans = max(ans,maxi);
+					ans = max(ans, maxi);
 				}
 			}
 		}
