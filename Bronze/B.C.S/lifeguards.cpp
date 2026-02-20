@@ -1,4 +1,5 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
+#define ll long long
 using namespace std;
 
 void setIO(string s) {
@@ -8,34 +9,36 @@ void setIO(string s) {
 }
 
 int main(){
-	setIO("lifeguards");
-	vector<int> tl(1001);
-	int n;
+    setIO("lifeguards");
+    int n;
 	cin >> n;
-	vector<int> start(n);
-	vector<int> end(n);
-	for(int i=0;i<n;i++){
+	vector<int> interval(1001);
+	vector<int> start(n), end(n);
+	int low = INT_MAX, high = INT_MIN;
+	for(int i = 0; i < n; i++){
 		cin >> start[i] >> end[i];
-		for(int j = start[i];j < end[i];j++){
-			tl[j]++;
+		for(int j = start[i]; j < end[i]; j++){
+			interval[j]++;
 		}
+		low = min(low, start[i]);
+		high = max(high, end[i]);
 	}
-	
-	int ans = 0;
-	for(int i=0;i<n;i++){
-		for(int j = start[i];j < end[i];j++){
-			tl[j]--;
+	int ans = 0; 
+	for(int i = 0; i < n; i++){
+		for(int j = start[i]; j < end[i]; j++){
+			interval[j]--;
 		}
-		int cur = 0;
-		for(int j = 0;j < 1000;j++){
-			if(tl[j] > 0){
-				cur++;
+		int count = 0;
+		for(int j = low; j <= high; j++){
+			if(interval[j]){
+				count++;
 			}
 		}
-		for(int j = start[i];j < end[i];j++){
-			tl[j]++;
+		for(int j = start[i]; j < end[i]; j++){
+			interval[j]++;
 		}
-		ans = max(ans,cur);
-	} 	 
-	cout << ans;
+		ans = max(ans, count);
+	}
+	cout << ans << endl;
+	return 0;
 }
