@@ -1,4 +1,5 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
+#define ll long long
 using namespace std;
 
 void setIO(string s) {
@@ -8,26 +9,25 @@ void setIO(string s) {
 }
 
 int main(){
-	setIO("circlecross");
-	string s;
-	cin >> s;
-	vector<int> entry(26,-1);
-	vector<int> exit(26,-1);
-	for(int i=0;i<52;i++){
-		if(entry[s[i] - 'A'] == -1){
-			entry[s[i] - 'A'] = i;
-		}
-		else{
-			exit[s[i] - 'A'] = i;
-		}
+    setIO("circlecross");
+	string points;
+	cin >> points;
+	vector<vector<int>> alphabet(26);
+	for(int i = 0; i < 52; i++){
+		alphabet[points[i] - 'A'].push_back(i);
 	}
 	int ans = 0;
-	for(int i=0;i<26;i++){
-		for(int j=0;j<26;j++){
-			if(entry[i] < entry[j] && entry[j] < exit[i] && exit[i] < exit[j]){
+	for(int i = 0; i < 26; i++){
+		vector<int> count(26);
+		for(int j = alphabet[i][0] + 1; j < alphabet[i][1]; j++){
+			count[points[j] - 'A']++;
+		}
+		for(int j = 0; j < 26; j++){
+			if(count[j] == 1){
 				ans++;
 			}
 		}
-	} 
-	cout << ans;
+	}
+	cout << ans/2 << endl;
+	return 0;
 }
