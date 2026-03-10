@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 
 void setIO(string s) {
@@ -9,40 +9,34 @@ void setIO(string s) {
 
 int main(){
 	setIO("notlast");
-	vector<string> cows{"Bessie","Elsie","Daisy","Gertie","Annabelle","Maggie","Henrietta"};
-	map<string,int> mp;
-	for(int i=0;i<7;i++){
-		mp[cows[i]] = 0;
-	}
+	vector<string> vec = {"Bessie", "Elsie", "Annabelle", "Daisy",
+	"Henrietta", "Gertie", "Maggie"};
 	int n;
 	cin >> n;
-	for(int i=0;i<n;i++){
+	map<string, int> mp;
+	for(auto i : vec){
+		mp[i];
+	}
+	for(int i = 0; i < n; i++){
 		string s;
 		int x;
 		cin >> s >> x;
 		mp[s] += x;
 	}
-	set<int> s;
-	multiset<int> ms;
-	for(auto &x : mp){
-		s.insert(x.second);
-		ms.insert(x.second);
+	multiset<int> log;
+	for(auto& i : mp){
+		log.insert(i.second);
 	}
-	 
-	if(int(s.size()) == 1){
-		cout << "Tie\n";
-		return 0;
-	}
-	auto it = s.begin();
-	it++;
-	int second = *it;
-	if(ms.count(second) > 1){
+	auto it = log.begin();
+	auto x = log.upper_bound(*it);
+	if(x == log.end() || log.count(*x) > 1){
 		cout << "Tie\n";
 	}
 	else{
-		for(auto &x : mp){
-			if(x.second == second){
-				cout << x.first << "\n";
+		for(auto& i : mp){
+			if(i.second == *x){
+				cout << i.first << "\n";
+				return 0;
 			}
 		}
 	}
