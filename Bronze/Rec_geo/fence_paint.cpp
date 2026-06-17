@@ -7,14 +7,18 @@ void setIO(string s) {
 	freopen((s+".out").c_str(),"w",stdout);
 }
 
-int main(){
+int main() {
 	setIO("paint");
-	int a,b,c,d;
+	int a, b, c, d;
 	cin >> a >> b >> c >> d;
-	if(b<=c || d<=a){
-		cout << (b-a) + (d-c);
-	}
+	// When the lines overlap each other
+	if((c >= a && d <= b) || (a >= c && b <= d) ||
+		(c >= a && c <= b && b >= c && b <= d) ||
+		(a >= c && a <= d && d >= a && a <= b)){
+			cout << max(b, d) - min(a, c);
+		}
+	// When the lines have no common point
 	else{
-		cout << max(d,b) - min(a,c);
+		cout << (b - a) + (d - c);
 	}
 }
