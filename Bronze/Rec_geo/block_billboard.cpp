@@ -1,3 +1,55 @@
+// Solution 1: It's a basic(not brute force) approach. It's correct, but solution 2 is much simpler and easier to understand.
+// Note: Both solutions work. But the difference is implementation.
+
+// Solution 1:
+#include <bits/stdc++.h>
+#define ll long long
+using namespace std;
+
+void setIO(string s) {
+	ios_base::sync_with_stdio(0); cin.tie(0);
+	freopen((s+".in").c_str(),"r",stdin);
+	freopen((s+".out").c_str(),"w",stdout);
+}
+
+int main() {
+	setIO("billboard");
+	vector<int> b1(4), b2(4), t(4);
+	cin >> b1[0] >> b1[1] >> b1[2] >> b1[3];
+	cin >> b2[0] >> b2[1] >> b2[2] >> b2[3];
+	cin >> t[0] >> t[1] >> t[2] >> t[3];
+	int total = 0;
+	int area_b1 = (b1[2] - b1[0]) * (b1[3] - b1[1]);
+	int area_b2 = (b2[2] - b2[0]) * (b2[3] - b2[1]);
+	if(b1[0] >= t[2] || b1[1] >= t[3] || t[0] >= b1[2] || t[1] >= b1[3]){
+		total += area_b1;
+	}
+	else{
+		vector<int> sort_x = {b1[0], b1[2], t[0], t[2]};
+		vector<int> sort_y = {b1[1], b1[3], t[1], t[3]};
+		sort(sort_x.begin(), sort_x.end());
+		sort(sort_y.begin(), sort_y.end());
+		int overlap = (sort_x[2] - sort_x[1]) * (sort_y[2] - sort_y[1]);
+		area_b1 -= overlap;
+		total += area_b1;
+	}
+	if(b2[0] >= t[2] || b2[1] >= t[3] || t[0] >= b2[2] || t[1] >= b2[3]){
+		total += area_b2;
+	}
+	else{
+		vector<int> sort_x = {b2[0], b2[2], t[0], t[2]};
+		vector<int> sort_y = {b2[1], b2[3], t[1], t[3]};
+		sort(sort_x.begin(), sort_x.end());
+		sort(sort_y.begin(), sort_y.end());
+		int overlap = (sort_x[2] - sort_x[1]) * (sort_y[2] - sort_y[1]);
+		area_b2 -= overlap;
+		total += area_b2;
+	}
+	cout << total << "\n";
+	return 0;
+}
+
+// Solution 2:
 #include <bits/stdc++.h>
 using namespace std;
 
