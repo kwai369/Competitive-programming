@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#define ll long long
 using namespace std;
 
 void setIO(string s) {
@@ -7,12 +8,14 @@ void setIO(string s) {
 	freopen((s+".out").c_str(),"w",stdout);
 }
 
-int main(){
+int main() {
 	setIO("square");
-	int a_x1,a_y1,a_x2,a_y2;
-	int b_x1,b_y1,b_x2,b_y2;
-	cin >> a_x1 >> a_y1 >> a_x2 >> a_y2;
-	cin >> b_x1 >> b_y1 >> b_x2 >> b_y2;
-	int ans = max(max(a_x2,b_x2) - min(a_x1,b_x1),max(a_y2,b_y2) - min(a_y1,b_y1));
-	cout << ans*ans;
+	int b1x, t1x, b1y, t1y, b2x, t2x, b2y, t2y;
+	cin >> b1x >> b1y >> t1x >> t1y;
+	cin >> b2x >> b2y >> t2x >> t2y;
+	int length = max(t1x, t2x) - min(b1x, b2x);
+	int width = max(t1y, t2y) - min(b1y, b2y);
+	int side = max(length, width);
+	cout << side*side;
+	return 0;
 }
